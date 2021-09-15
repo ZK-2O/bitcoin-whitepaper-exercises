@@ -74,12 +74,12 @@ function verifyChain(chain) {
 
 function verifyBlock(bl) {
 	//Check if Genesis Block
-	if (isEmpty(bl.data) &&
-		bl.index === 0 &&
-		bl.hash === "000000")
+	if (!isEmpty(bl.data) &&
+		!(bl.index === 0) &&
+		!(bl.hash === "000000"))
 	{
-		//If these conditions meet, it's a valid genesis block
-		return true;
+		//If these conditions meet, it's an INVALID genesis block
+		return false;
 	}
 
 	let blockInfo = {
