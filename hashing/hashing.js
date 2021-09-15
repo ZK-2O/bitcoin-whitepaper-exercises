@@ -74,15 +74,11 @@ function verifyChain(chain) {
 
 function verifyBlock(bl) {
 	//Check if Genesis Block
-	if (!isEmpty(bl.data) &&
-		!(bl.index === 0) &&
-		!(bl.hash === "000000"))
+	if (isEmpty(bl.data) &&
+		bl.index === 0 &&
+		bl.hash === "000000")
 	{
-		//If these conditions meet, it's an INVALID genesis block
-		return false;
-	}
-	else
-	{
+		//If these conditions meet, it's a valid genesis block
 		return true;
 	}
 
@@ -116,8 +112,10 @@ function isEmpty(val) {
 	return false;
 }
 
+
 //Uncomment below to simulate invalid block
 //Blockchain.blocks[3].data = ""
+//Blockchain.blocks[0].data = "awef"
 
 let chain = verifyChain(Blockchain)
 console.log(chain)
