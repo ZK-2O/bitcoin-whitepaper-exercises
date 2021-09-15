@@ -113,7 +113,7 @@ function isEmpty(val) {
 }
 
 //Uncomment below to simulate invalid block
-Blockchain.blocks[3].data = ""
+//Blockchain.blocks[3].data = ""
 
 let chain = verifyChain(Blockchain)
 console.log(chain)
