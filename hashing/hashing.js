@@ -81,6 +81,10 @@ function verifyBlock(bl) {
 		//If these conditions meet, it's an INVALID genesis block
 		return false;
 	}
+	else
+	{
+		return true;
+	}
 
 	let blockInfo = {
 		index: bl.index,
