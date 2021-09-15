@@ -50,9 +50,8 @@ function createBlock(data) {
 // **********************************
 
 function blockHash(bl) {
-	var stringJSON = JSON.stringify(bl)
 	return crypto.createHash("sha256").update(
-		stringJSON
+		JSON.stringify(bl)
 	).digest("hex");
 }
 
@@ -90,18 +89,19 @@ function verifyBlock(bl) {
 	};
 
 	//For the rest of the blocks
-	if (isEmpty(bl.data) ||
-		isNaN(parseInt(bl.index)) || 
-		parseInt(bl.index) < 0 ||
-		isEmpty(bl.prevHash) ||
-		bl.hash != blockHash(blockInfo))
+	if (!isEmpty(bl.data) &&
+		!isNaN(parseInt(bl.index)) &&
+		!(parseInt(bl.index) < 0) &&
+		!isEmpty(bl.prevHash) &&
+		bl.hash === blockHash(blockInfo))
 	{
-		//If any of the above conditions are met, it's an INVALID block
-		console.log(`Invalid Block:\r\n${JSON.stringify(bl)}`)
-		return false;
+		//If all of the above conditions meet, the block is valid
+		return true;
 	}
-
-	return true;
+	
+	//Default is an invalid block because the conditions above would not have been met, so we return false
+	console.log(`Invalid Block:\r\n${JSON.stringify(bl)}`)
+	return false;
 }
 
 function isEmpty(val) {
@@ -117,5 +117,4 @@ function isEmpty(val) {
 //Blockchain.blocks[3].data = ""
 //Blockchain.blocks[0].data = "awef"
 
-let chain = verifyChain(Blockchain)
-console.log(chain)
+console.log(verifyChain(Blockchain));
